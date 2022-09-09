@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SuperAdminController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,9 +21,24 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// user
+
+Route::group(['middleware'=>'user'],function(){
+
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+});
+
+
 
 
 //super admin
+Route::group(['middleware'=>['auth','admin']],function(){
 
-Route::get('admin',[SuperAdminController::class,'index'])->name('superadminindex');
+    Route::get('admin',[SuperAdminController::class,'index'])->name('superadminindex');
+  
+
+
+
+});
+
+
