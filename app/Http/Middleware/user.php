@@ -17,7 +17,7 @@ class user
      */
     public function handle(Request $request, Closure $next)
     {
-        $message = "";
+        
         if(!Auth::user()->Status) {
             Auth::logout();
             return redirect('login')->withErrors(['Your account is inactive']);
