@@ -35,6 +35,10 @@ Route::group(['middleware'=>'user'],function(){
 Route::group(['middleware'=>['auth','admin']],function(){
 
     Route::get('admin',[SuperAdminController::class,'index'])->name('superadminindex');
+    Route::get('changestatus/{id}',[SuperAdminController::class,'insert'])->name('superadminchangestatus');
+    Route::get('delete/{id}',[SuperAdminController::class,'destroy']);
+    Route::get('edit/{id}',[SuperAdminController::class,'edit']);
+    Route::put('edit/{id}',[SuperAdminController::class,'update'])->name('update');
   
 
 

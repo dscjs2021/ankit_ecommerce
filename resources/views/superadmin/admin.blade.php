@@ -35,47 +35,54 @@
             <div class="col">
                 <div class="card">
                     <div class="card-header">
-                        
+
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">All Users Details</h5>
+                        <form action="{{route('superadminindex')}}" method="post">
+                            <h5 class="card-title">All Users Details</h5>
 
-                        <table id="myTable" class="display">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($getalldata as $i)
-                                @if($i->role == 0)
-                                <tr>
-                                    <td>{{$i->id}}</td>
-                                    <td>{{$i->name}}</td>
-                                    <td>{{$i->email}}</td>
-                                    <td>{{$i->status}}</td>
-                                    <td>
-                                        <a href="#" class="btn btn-sm btn-danger">Delete</a>
-                                        <a href="#" class="btn btn-sm btn-primary">Edit</a>
-                                    </td>
-                                </tr>
-                                @endif
-                                @endforeach
+                            <table id="myTable" class="display">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($getalldata as $i)
+                                    @if($i->role == 0)
+                                    <tr>
+                                        <td>{{$i->id}}</td>
+                                        <td>{{$i->name}}</td>
+                                        <td>{{$i->email}}</td>
+                                        <td>
+                                            @if($i->status==1)
+                                            <a href="{{url('changestatus/'.$i->id)}}" class="btn btn-sm btn-light"  name="active" >Active</button>                                           
+                                            @else
+                                            <a href="{{url('changestatus/'.$i->id)}}" class="btn btn-sm btn-dark"  name="inactive" >Inactive</button>                                           
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <a href="{{url('delete/'.$i->id)}}" class="btn btn-sm btn-danger">Delete</a>
+                                            <a href="{{url('edit/'.$i->id)}}" class="btn btn-sm btn-primary">Edit</a>
+                                        </td>
+                                    </tr>
+                                    @endif
+                                    @endforeach
 
-                            </tbody>
-                        </table>
-
+                                </tbody>
+                            </table>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
- 
+
 
     <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
     <!-- data table -->
